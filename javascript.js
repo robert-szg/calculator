@@ -4,13 +4,11 @@ const display = document.querySelector('.display');
 const operators = document.querySelectorAll('.operator');
 const equals = document.querySelector('#equals');
 
-let num1 = 0;
-let num2 = 0;
-let operator;
-
 let result = 'null';
 let input = 0;
-let newOp;
+let operator;
+
+
 
 function add(num1, num2){
     return parseInt(num1) + parseInt(num2);
@@ -63,11 +61,6 @@ function clearDisplay(){
     }
 }
 
-function clearNumbers(){
-    num1 = 0;
-    num2 = 0;
-}
-
 function inputNumber(num){
     if(display){
         display.textContent = display.textContent + num;
@@ -89,37 +82,22 @@ clear.addEventListener('click', () => {
 
 operators.forEach(op => {
     op.addEventListener('click', () => {
-        num1 = parseInt(display.textContent);
-        operator = op.textContent;
-
-
         if(result == 'null'){
             result = parseInt(display.textContent);
-            newOp = op.textContent;
+            operator = op.textContent;
         }
         else{
             input = parseInt(display.textContent);
-            result = operate(result, input, newOp);
-            newOp = op.textContent;
+            result = operate(result, input, operator);
+            operator = op.textContent;
         }
-
-        clearDisplay();
-
-        console.log(result);
-        console.log(input);
-        console.log(newOp);
+        clearDisplay(); 
     })
 })
 
 equals.addEventListener('click', () => {
-    num2 = parseInt(display.textContent);
-
     input = parseInt(display.textContent);
-
-    console.log(newOp);
-    console.log(input);
-    console.log(result);
-    display.textContent = operate(result, input, newOp);
+    display.textContent = operate(result, input, operator);
 })
 
 
